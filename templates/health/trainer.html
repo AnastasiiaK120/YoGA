@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Page Header Start -->
+<div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Trainer</h2>
+                    </div>
+                    <div class="col-12">
+                        <a href="">Home</a>
+                        <a href="">Trainer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- Page Header End -->
+
+
+<!-- Team Start -->
+<div class="team">
+            <div class="container">
+                <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+                    <p>Yoga Trainer</p>
+                    <h2>Expert Yoga Trainer</h2>
+                </div>
+                <div class="row">
+                    {% for trainer in trainers %}
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.0s">
+                        <div class="team-item">
+                            <div class="team-img">
+                                <img src="{{ trainer.image.url }}" alt="Image">
+                            </div>
+                            <div class="team-text">
+                                <h2>{{ trainer.name }}</h2>
+                                <p>{{ trainer.description }}r</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+
+            </div>
+        </div>
+<!-- Team End -->
+
+{% endblock content %}
