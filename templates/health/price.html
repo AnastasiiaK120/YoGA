@@ -10,7 +10,7 @@
                         <h2>Price</h2>
                     </div>
                     <div class="col-12">
-                        <a href="">Home</a>
+                        <a href="{% url 'home' %}">Home</a>
                         <a href="">Price</a>
                     </div>
                 </div>
@@ -19,8 +19,7 @@
 <!-- Page Header End -->
 
 
-<!-- Price Start -->
-<div class="price">
+        <div class="price">
             <div class="container">
                 <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
                     <p>Yoga Package</p>
@@ -39,24 +38,26 @@
                                 </div>
                             </div>
                             <div class="price-body">
-                                <div class="price-description">
-                                    <ul>
-                                        <li>{{ price.plan }}</li>
-                                    </ul>
-                                </div>
+                                {% for plan in price.plan.all %}
+                                    <div class="price-description">
+                                        <ul>
+                                            <li>{{ plan.name }}</li>
+                                        </ul>
+                                    </div>
+                                {% endfor %}
                             </div>
                             <div class="price-footer">
                                 <div class="price-action">
-                                    <a class="btn" href="">Join Now</a>
+                                    <a class="btn" href="{% url 'contact' %}" class="nav-item nav-link
+                        {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Join Now</a>
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
                     </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
-<!-- Price End -->
+</div>
         
         
 <!-- Discount Start -->
