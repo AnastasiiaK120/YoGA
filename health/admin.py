@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Category, Service, Trainer, Schedule, Pose, Blog, Application, Price, Plan
+from .models import Category, Service, Trainer, Schedule, Pose, Blog, \
+    Application, Price, Plan,  Social
 
 
 admin.site.register(Category)
@@ -11,3 +12,5 @@ admin.site.register(Blog)
 admin.site.register(Application)
 admin.site.register(Price)
 admin.site.register(Plan)
+admin.site.register(Social)
+

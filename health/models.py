@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import CASCADE
 from django.utils import timezone
 
 
@@ -24,6 +25,9 @@ class Trainer(models.Model):
     description = models.TextField()
     image = models.ImageField(null=True, blank=True, upload_to='trainerphoto')
 
+    def __str__(self):
+        return self.name
+
 
 class Plan(models.Model):
     name = models.CharField(max_length=150, null=True)
@@ -35,7 +39,7 @@ class Plan(models.Model):
 class Price(models.Model):
     name = models.CharField(max_length=150)
     price = models.PositiveIntegerField()
-    plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
+    plan = models.ManyToManyField(Plan, null=True)
 
     def __str__(self):
         return self.name
@@ -54,7 +58,7 @@ class Schedule(models.Model):
 
 
 class Pose(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='posephoto')
 
@@ -64,7 +68,6 @@ class Application(models.Model):
     email = models.EmailField(max_length=150, null=True)
     subject = models.CharField(max_length=150, null=True)
     message = models.TextField()
-
 
 
 class Tag(models.Model):
@@ -90,16 +93,8 @@ class Blog(models.Model):
         return self.comment.all()
 
 
-class Comment(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.CharField(max_length=100)
-    website = models.CharField(max_length=150, blank=True, null=True)
-    message = models.TextField(max_length=500)
-    create_at = models.DateTimeField(default=timezone.now)
-    post = models.ForeignKey(Blog, related_name="comment", on_delete=models.CASCADE)
 
 
-
-
-
-
+class Social(models.Model):
+    name = models.CharField(max_length=200)
+    link = models.URLField()

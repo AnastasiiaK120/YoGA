@@ -9,7 +9,7 @@
                         <h2>About Us</h2>
                     </div>
                     <div class="col-12">
-                        <a href="">Home</a>
+                        <a href="{% url 'home' %}">Home</a>
                         <a href="">About Us</a>
                     </div>
                 </div>
@@ -23,9 +23,6 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-5 col-md-6">
-                        <div class="about-img">
-                            <img src="img/about.png" alt="Image">
-                        </div>
                     </div>
                     <div class="col-lg-7 col-md-6">
                         <div class="section-header text-left">
@@ -34,12 +31,15 @@
                         </div>
                         <div class="about-text">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem.
+                                We have one of the largest corporate wellness programs in town!  If you're interested in setting up a program for your company, please let us know.
                             </p>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem. Curabitur non nisl nec nisi scelerisque maximus.
+                                Yoga is a realization in which we break patterns that shackle our souls.
+
+                                Yoga is not about reaching, it is about letting go of everything that prevents the light of our inner self from illuminating our moments. It is more about letting go of everything that prevents us from experiencing who we already are.
+
+                                Yoga works all aspects of being, not only the physical body, although we use the body, the vehicle we have for this walk through existence, to make our consciousness expand.
                             </p>
-                            <a class="btn" href="">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,6 @@
 <!-- About End -->
 
 
-<!-- Team Start -->
 <div class="team">
             <div class="container">
                 <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
@@ -60,18 +59,18 @@
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.0s">
                         <div class="team-item">
                             <div class="team-img">
-                                <img src="{{ trainer.image.url" alt="Image">
+                                <img src="{{ trainer.image.url }}" alt="Image">
                             </div>
                             <div class="team-text">
                                 <h2>{{ trainer.name }}</h2>
-                                <p>{{ trainer.description }}</p>
+                                <p>{{ trainer.description }}r</p>
                             </div>
                         </div>
-                     {% endfor %}
                     </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
+</div>
 <!-- Team End -->
 
 

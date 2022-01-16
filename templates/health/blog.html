@@ -10,7 +10,7 @@
                         <h2>Yoga Blog</h2>
                     </div>
                     <div class="col-12">
-                        <a href="">Home</a>
+                        <a href="{% url 'home' %}">Home</a>
                         <a href="">Yoga Blog</a>
                     </div>
                 </div>
@@ -18,37 +18,38 @@
         </div>
 <!-- Page Header End -->
 
-
 <!-- Blog Start -->
 <div class="blog">
-            <div class="container">
-                <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
-                    <p>From Blog</p>
-                    <h2>Latest Yoga Articles</h2>
-                </div>
-                <div class="row blog-page">
-                    {% for post in posts %}
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.0s">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="{{ blog.image.url }}" alt="Blog">
-                            </div>
-                            <div class="blog-text">
-                                <h2>Lorem ipsum dolor</h2>
-                                <div class="blog-meta">
-                                    <p><i class="far fa-list-alt"></i>{{ blog.service }}</p>
-                                    <p><i class="far fa-calendar-alt"></i>{{ blog.date }}</p>
-                                </div>
-                                <p>
-                                   {{ blog.text|slice:"30" }}
-                                </p>
-                                <a class="btn" href="{% url 'single_page' post.id %}">Read More <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
+    <div class="container">
+        <div class="section-header text-center">
+            <p>Latest From Blog</p>
+            <h2>Learn More from Latest Yoga Blog</h2>
+        </div>
+        <div class="row blog-page">
+            {% for post in posts %}
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="{{ post.image.url }}" alt="Blog">
                     </div>
-                    {% endfor %}
+                    <div class="blog-meta">
+
+                        <i class="fa fa-calendar-alt"></i>
+                        <p>{{ post.date }}</p>
+                    </div>
+                    <div class="blog-text">
+                        <h2>{{ post.name }}</h2>
+                        <p>{{ post.text|slice:"30" }}
+                        </p>
+                        <a class="btn" href="{% url 'single_page' post.id %}">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
 </div>
+    </div>
+</div>
+<!-- Blog End -->
+
 
 {% endblock content %}

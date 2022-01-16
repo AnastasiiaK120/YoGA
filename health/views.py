@@ -1,7 +1,11 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView, DetailView, CreateView
+from django.views.generic import TemplateView, DetailView, CreateView, ListView
+from rest_framework.response import Response
+
 from .forms import *
+from rest_framework.views import APIView
+from .serializers import CategoryListSerializer
 
 
 from .models import *
@@ -22,7 +26,6 @@ class HomeView(TemplateView):
 
             }
         )
-
 
 
 class ServiceView(TemplateView):
@@ -72,7 +75,6 @@ class ScheduleView(TemplateView):
         )
 
 
-
 class TrainerView(TemplateView):
     def get(self, request):
         return render(
@@ -117,7 +119,6 @@ class ContactView(TemplateView):
         )
 
 
-
 class BlogView(TemplateView):
     def get(self, request):
         return render(request, 'health/blog.html', {'posts': Blog.objects.all()})
@@ -134,14 +135,9 @@ class SinglePageView(DetailView):
         return get_object_or_404(Blog, id=id_)
 
 
-class CreateComment(CreateView):
-    model = Comment
-    form_class = CommentForm
+class CategoryListView(APIView):
+    def get(self, request):
+        categories = Category.objects.filter(draft=False)
+        serializer = CategoryListSerializer(categories, many=True)
+        return Response(serializer.data)
 
-    def form_valid(self, form):
-        form.instance.post_id = self.kwargs.get('pk')
-        self.object = form.save()
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return self.object.post.get_absolute_url()
