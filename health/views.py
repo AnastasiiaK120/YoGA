@@ -1,11 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, DetailView, CreateView, ListView
+from rest_framework import generics
 from rest_framework.response import Response
 
 from .forms import *
 from rest_framework.views import APIView
-from .serializers import CategoryListSerializer
+from .serializers import CategoryListSerializer, CategoryDetailSerializer,\
+    CategoryCreateSerializer, TrainerListSerializer, TrainerDetailSerializer
 
 
 from .models import *
@@ -137,7 +139,31 @@ class SinglePageView(DetailView):
 
 class CategoryListView(APIView):
     def get(self, request):
-        categories = Category.objects.filter(draft=False)
+        categories = Category.objects.all()
         serializer = CategoryListSerializer(categories, many=True)
         return Response(serializer.data)
 
+
+class CategoryDetailView(APIView):
+    def get(self, request, pk):
+        category = Category.objects.get(id=pk)
+        serializer = CategoryDetailSerializer(category)
+        return Response(serializer.data)
+
+
+class CategoryCreateView(APIView):
+    def post(self, request):
+        category = CategoryCreateSerializer(data=request.data)
+        if category.is_valid():
+            category.save()
+        return Response(status=201)
+
+
+class TrainersListView(generics.ListAPIView):
+    queryset = Trainer.objects.all()
+    serializer_class = TrainerListSerializer
+
+
+class TrainersDetailView(generics.RetrieveAPIView):
+    queryset = Trainer.objects.all()
+    serializer_class = TrainerDetailSerializer

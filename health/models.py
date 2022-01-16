@@ -93,8 +93,6 @@ class Blog(models.Model):
         return self.comment.all()
 
 
-
-
 class Social(models.Model):
     name = models.CharField(max_length=200)
     link = models.URLField()
